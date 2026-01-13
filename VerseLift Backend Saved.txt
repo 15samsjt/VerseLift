@@ -1,0 +1,93 @@
+Last login: Tue Dec  9 02:02:45 on ttys000
+jinsamson@Mac ~ % # make folders
+mkdir -p ~/Documents/VerseLift/backend
+cd ~/Documents/VerseLift/backend
+
+zsh: command not found: #
+jinsamson@Mac backend % npm init -y
+
+Wrote to /Users/jinsamson/Documents/VerseLift/backend/package.json:
+
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+jinsamson@Mac backend % npm install express cors axios
+
+
+added 78 packages, and audited 79 packages in 1s
+
+22 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+jinsamson@Mac backend % touch server.js
+
+jinsamson@Mac backend % cd ~/Documents/BPP/DevOps/VerseLift/backend
+
+cd: no such file or directory: /Users/jinsamson/Documents/BPP/DevOps/VerseLift/backend
+jinsamson@Mac backend % pwd
+
+/Users/jinsamson/Documents/VerseLift/backend
+jinsamson@Mac backend % ls
+
+node_modules		package-lock.json	package.json		server.js
+jinsamson@Mac backend % npm install express axios cors
+
+
+up to date, audited 79 packages in 348ms
+
+22 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+jinsamson@Mac backend % node server.js
+
+jinsamson@Mac backend % cat server.js
+
+jinsamson@Mac backend % code server.js
+
+zsh: command not found: code
+jinsamson@Mac backend % const express = require("express");
+const axios = require("axios");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// --- Bible Verse Endpoint ---
+app.get("/verse", async (req, res) => {
+  try {
+    // Free Bible API (ESV, KJV, etc.)
+    const response = await axios.get("https://bible-api.com/john%203:16");
+
+    res.json({
+      reference: response.data.reference,
+      text: response.data.text,
+      translation: response.data.translation_name,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch verse" });
+  }
+});
+
+// --- Start server ---
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+zsh: parse error near `)'
+jinsamson@Mac backend % 
